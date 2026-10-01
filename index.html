@@ -1,102 +1,156 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f8f4">
-  <title>Recipe Book</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
-</head>
-<body>
-  <header class="topbar">
-    <a class="wordmark" href="#" aria-label="Recipe Book home">
-      <span class="wordmark-mark" aria-hidden="true">R</span>
-      <span>Recipe Book</span>
-    </a>
-    <span class="save-note"><span class="save-dot"></span> Saved on this device</span>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f8f4" />
+    <title>Recipe Book</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="#" aria-label="Recipe Book home">
+        <span class="wordmark-mark" aria-hidden="true">R</span>
+        <span>Recipe Book</span>
+      </a>
+    </header>
 
-  <main class="page-shell">
-    <section class="page-heading" aria-labelledby="page-title">
-      <div>
-        <p class="eyebrow">YOUR KITCHEN NOTES</p>
-        <h1 id="page-title">Recipes</h1>
-        <p class="heading-copy">A good place to keep the meals you come back to.</p>
-      </div>
-      <button class="button button-primary" id="new-recipe" type="button">
-        <span aria-hidden="true">+</span> Add a recipe
-      </button>
-    </section>
-
-    <section class="toolbar" aria-label="Find recipes">
-      <label class="search-box">
-        <span class="search-icon" aria-hidden="true"></span>
-        <span class="sr-only">Search recipes</span>
-        <input id="search" type="search" placeholder="Search your recipes" autocomplete="off">
-      </label>
-      <label class="sort-control" for="sort-recipes">
-        <span>Sort</span>
-        <select id="sort-recipes">
-          <option value="recent">Recently added</option>
-          <option value="az">Name A to Z</option>
-        </select>
-      </label>
-    </section>
-
-    <div class="content-layout">
-      <aside class="category-panel" aria-label="Recipe categories">
-        <p class="section-label">BROWSE</p>
-        <nav class="category-list" id="category-list" aria-label="Filter by category"></nav>
-        <div class="aside-note">
-          <span class="note-mark" aria-hidden="true">i</span>
-          <p>Your recipes stay in this browser. They won't be shared or synced.</p>
-        </div>
-        <button class="text-button clear-button" id="clear-samples" type="button">Clear sample recipes</button>
-      </aside>
-
-      <section class="recipe-section" aria-labelledby="recipe-list-title">
-        <div class="list-heading">
-          <div>
-            <h2 id="recipe-list-title">All recipes</h2>
-            <p id="recipe-count" class="muted-copy"></p>
-          </div>
-          <button class="text-button" id="reset-filter" type="button" hidden>Show all</button>
-        </div>
-        <div id="recipe-grid" class="recipe-grid" aria-live="polite"></div>
-      </section>
-    </div>
-  </main>
-
-  <dialog id="recipe-dialog" class="recipe-dialog">
-    <form id="recipe-form" method="dialog">
-      <div class="dialog-heading">
+    <main class="page-shell">
+      <section class="page-heading" aria-labelledby="page-title">
         <div>
-          <p class="eyebrow">KEEP A GOOD ONE</p>
-          <h2 id="dialog-title">Add a recipe</h2>
+          <h1 id="page-title">Recipes</h1>
+          <p class="heading-copy">
+            A good place to keep the meals you come back to.
+          </p>
         </div>
-        <button class="close-button" type="button" id="close-dialog" aria-label="Close">×</button>
-      </div>
-      <input id="recipe-id" type="hidden">
-      <label class="field-label" for="recipe-name">Recipe name</label>
-      <input class="field-input" id="recipe-name" name="name" maxlength="70" required placeholder="e.g. Sunday tomato soup">
-      <label class="field-label" for="recipe-category">Category</label>
-      <select class="field-input" id="recipe-category" name="category" required></select>
-      <label class="field-label" for="recipe-ingredients">Ingredients</label>
-      <textarea class="field-input" id="recipe-ingredients" name="ingredients" rows="4" placeholder="One ingredient per line"></textarea>
-      <label class="field-label" for="recipe-method">Method and notes</label>
-      <textarea class="field-input" id="recipe-method" name="method" rows="5" placeholder="How do you make it? Anything worth remembering?"></textarea>
-      <div class="form-actions">
-        <button class="button button-quiet" type="button" id="cancel-dialog">Cancel</button>
-        <button class="button button-primary" type="submit">Save recipe</button>
-      </div>
-    </form>
-  </dialog>
+        <button class="button button-primary" id="new-recipe" type="button">
+          <span aria-hidden="true">+</span> Add a recipe
+        </button>
+      </section>
 
-  <dialog id="detail-dialog" class="recipe-dialog detail-dialog">
-    <article id="recipe-detail"></article>
-  </dialog>
+      <section class="toolbar" aria-label="Find recipes">
+        <label class="search-box">
+          <span class="search-icon" aria-hidden="true"></span>
+          <span class="sr-only">Search recipes</span>
+          <input
+            id="search"
+            type="search"
+            placeholder="Search your recipes"
+            autocomplete="off"
+          />
+        </label>
+        <label class="sort-control" for="sort-recipes">
+          <span>Sort</span>
+          <select id="sort-recipes">
+            <option value="recent">Recently added</option>
+            <option value="az">Name A to Z</option>
+          </select>
+        </label>
+      </section>
 
-  <footer class="page-footer">Made for the recipes worth keeping.</footer>
-</body>
+      <div class="content-layout">
+        <aside class="category-panel" aria-label="Recipe categories">
+          <p class="section-label">BROWSE</p>
+          <nav
+            class="category-list"
+            id="category-list"
+            aria-label="Filter by category"
+          ></nav>
+          <div class="aside-note">
+            <span class="note-mark" aria-hidden="true">i</span>
+            <p>
+              Your recipes stay in this browser. They won't be shared or synced.
+            </p>
+          </div>
+          <button
+            class="text-button clear-button"
+            id="clear-samples"
+            type="button"
+          >
+            Clear sample recipes
+          </button>
+        </aside>
+
+        <section class="recipe-section" aria-labelledby="recipe-list-title">
+          <div class="list-heading">
+            <div>
+              <h2 id="recipe-list-title">All recipes</h2>
+              <p id="recipe-count" class="muted-copy"></p>
+            </div>
+            <button class="text-button" id="reset-filter" type="button" hidden>
+              Show all
+            </button>
+          </div>
+          <div id="recipe-grid" class="recipe-grid" aria-live="polite"></div>
+        </section>
+      </div>
+    </main>
+
+    <dialog id="recipe-dialog" class="recipe-dialog">
+      <form id="recipe-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">KEEP A GOOD ONE</p>
+            <h2 id="dialog-title">Add a recipe</h2>
+          </div>
+          <button
+            class="close-button"
+            type="button"
+            id="close-dialog"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <input id="recipe-id" type="hidden" />
+        <label class="field-label" for="recipe-name">Recipe name</label>
+        <input
+          class="field-input"
+          id="recipe-name"
+          name="name"
+          maxlength="70"
+          required
+          placeholder="e.g. Sunday tomato soup"
+        />
+        <label class="field-label" for="recipe-category">Category</label>
+        <select
+          class="field-input"
+          id="recipe-category"
+          name="category"
+          required
+        ></select>
+        <label class="field-label" for="recipe-ingredients">Ingredients</label>
+        <textarea
+          class="field-input"
+          id="recipe-ingredients"
+          name="ingredients"
+          rows="4"
+          placeholder="One ingredient per line"
+        ></textarea>
+        <label class="field-label" for="recipe-method">Method and notes</label>
+        <textarea
+          class="field-input"
+          id="recipe-method"
+          name="method"
+          rows="5"
+          placeholder="How do you make it? Anything worth remembering?"
+        ></textarea>
+        <div class="form-actions">
+          <button class="button button-quiet" type="button" id="cancel-dialog">
+            Cancel
+          </button>
+          <button class="button button-primary" type="submit">
+            Save recipe
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="detail-dialog" class="recipe-dialog detail-dialog">
+      <article id="recipe-detail"></article>
+    </dialog>
+
+    <footer class="page-footer">Made for the recipes worth keeping.</footer>
+  </body>
 </html>
